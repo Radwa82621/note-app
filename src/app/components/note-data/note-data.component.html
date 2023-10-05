@@ -1,0 +1,37 @@
+<section class="rounded p-4 bg-white shadow">
+  <form [formGroup]="dataForm" (ngSubmit)="sendData()">
+    <h2 class="text-center">Note data</h2>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>title</mat-label>
+      <input matInput placeholder="note title" formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Leave a note</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex. It makes me feel..."
+        formControlName="content"
+      ></textarea>
+    </mat-form-field>
+    <button
+      class="d-block ms-auto"
+      mat-raised-button
+      color="primary"
+      [disabled]="!dataForm.valid"
+      *ngIf="!data"
+    >
+      Add Note
+    </button>
+
+    <button
+      class="d-block ms-auto"
+      mat-raised-button
+      color="primary"
+      [disabled]="!dataForm.valid"
+      *ngIf="data"
+    >
+      Update Note
+    </button>
+  </form>
+</section>

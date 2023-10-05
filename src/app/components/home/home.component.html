@@ -1,0 +1,74 @@
+<div class="container">
+  <section class="py-4">
+    <mat-form-field
+      class="w-100"
+      appearance="outline"
+      *ngIf="userNotes.length > 0"
+    >
+      <mat-label>search...</mat-label>
+      <input matInput type="text" [(ngModel)]="value" />
+
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    {{ value }}
+    <button
+      class="d-block ms-auto"
+      mat-raised-button
+      color="primary"
+      (click)="openDialog()"
+    >
+      Add Note
+    </button>
+  </section>
+
+  <section>
+    <div class="row g-4">
+      <div class="col-md-3" *ngFor="let note of userNotes | filter : value">
+        <div class="card h-100">
+          <div class="card-body shadow">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="h5">{{ note.title }}</h3>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [swal]="deleteSwal">
+                  <mat-icon>delete</mat-icon>
+                  <span>delete</span>
+
+                  <swal
+                    #deleteSwal
+                    title="Delete {{ note.title }}?"
+                    text="This cannot be undone"
+                    icon="question"
+                    [showCancelButton]="true"
+                    [focusCancel]="true"
+                    (confirm)="deleteFile(note._id)"
+                  >
+                  </swal>
+                </button>
+                <button mat-menu-item (click)="setData(note)">
+                  <mat-icon>edit</mat-icon>
+                  <span>update</span>
+                </button>
+              </mat-menu>
+            </div>
+            <p class="text-muted small">{{ note.content }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

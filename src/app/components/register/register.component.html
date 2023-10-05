@@ -1,0 +1,83 @@
+<section class="min-vh-100 d-flex align-items-center justify-content-center mt-0">
+    <div class="container">
+    <div class="row g-0 shadow rounded overflow-hidden w-100 align-items-center ">
+        <div class=" col-lg-8 img d-none d-md-block ">
+          
+        </div>
+        <div class=" col-md-3">
+            <form class="example-form p-4" [formGroup]="registerForm" (ngSubmit)="register()">
+                <p class="text-center display-1 h1" >register</p>
+
+
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>first name</mat-label>
+                    <input type="text" matInput formControlName="name" placeholder="first name">
+                    <mat-error *ngIf="name.hasError('maxLength') && !name.hasError('required')">
+                      Please enter a valid first_name (max 10 characters)
+                    </mat-error>
+                    <mat-error *ngIf="name.hasError('required')">
+                      first name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                  
+              
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                  <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <div class="example-container">
+                  <mat-form-field appearance="outline" class="w-100" >
+                    <mat-label>Enter your password</mat-label>
+                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" placeholder="password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.hasError('required')">
+                      password is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                <!-- <button type="submit" class="btn btn-lg btn-outline-primary d-block mx-auto"> submit</button> -->
+              </div>
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>phone</mat-label>
+                  <input type="tel" matInput formControlName="phone" placeholder="phone">
+                  <mat-error *ngIf="phone.hasError('pattern') && !phone.hasError('required')">
+                    Please enter a valid phone number 
+                  </mat-error>
+                  <mat-error *ngIf="phone.hasError('required')">
+                    phone number is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>age</mat-label>
+                    <input type="number" matInput formControlName="age" placeholder="age">
+                    <mat-error *ngIf="age.hasError('max') && !age.hasError('required')">
+                      Please enter a valid age 
+                    </mat-error>
+                    <mat-error *ngIf="age.hasError('required')">
+                      age is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+
+
+               
+                  <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary" class="w-100">Register now</button>
+
+              </form>
+        </div>
+    </div>
+    </div>
+</section>
